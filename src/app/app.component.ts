@@ -7,12 +7,10 @@ import { OAuthService, AuthConfig, OAuthErrorEvent } from 'angular-oauth2-oidc';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent {
-
   constructor(
     private authService: OAuthService,
     private authConfig: AuthConfig,
   ) {
-    // For debugging purposes:
     this.authService.events.subscribe(event => {
       if (event instanceof OAuthErrorEvent) {
         console.error(event);
@@ -24,10 +22,21 @@ export class AppComponent {
     this.authService.configure(authConfig);
 
     this.authService.events
+      .filter(e => e.type === 'silent_refresh_error')
+      .subscribe(e => this.authService.initImplicitFlow());
+
+    this.authService.events
       .filter(e => e.type === 'token_received')
       .subscribe(e => this.authService.loadUserProfile());
 
-    this.authService.loadDiscoveryDocumentAndLogin();
+    this.authService
+      .loadDiscoveryDocument()
+      .then(_ => this.authService.tryLogin())
+      .then(_ => {
+        if (!this.authService.hasValidAccessToken()) {
+          this.authService.silentRefresh();
+        }
+      });
   }
 
   public login() { this.authService.initImplicitFlow(); }

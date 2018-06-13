@@ -1,6 +1,12 @@
 <h1>Welcome!</h1>
 
 <p>
+  This demo app shows how the angular-oauth2-oidc library pieces fit together.
+  Check out the <code>auth-config.ts</code> file for connecting this application to your own Identity Server.
+  See the <code>app.module.ts</code> and <code>app.component.ts</code> files for the important implementation details.
+</p>
+
+<p>
   <button (click)='login()'>login</button>
   <button (click)='logoff()'>logout</button>
   <button (click)='refresh()'>force silent refresh</button>
