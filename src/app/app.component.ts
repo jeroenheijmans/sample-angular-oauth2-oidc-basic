@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { filter } from 'rxjs/operators';
 import { OAuthService, AuthConfig, OAuthErrorEvent } from 'angular-oauth2-oidc';
 
 @Component({
@@ -22,11 +23,11 @@ export class AppComponent {
     this.authService.configure(authConfig);
 
     this.authService.events
-      .filter(e => e.type === 'silent_refresh_error')
+      .pipe(filter(e => e.type === 'silent_refresh_error'))
       .subscribe(e => this.authService.initImplicitFlow());
 
     this.authService.events
-      .filter(e => e.type === 'token_received')
+      .pipe(filter(e => e.type === 'token_received'))
       .subscribe(e => this.authService.loadUserProfile());
 
     this.authService
