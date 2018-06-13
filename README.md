@@ -1,27 +1,19 @@
-# SampleBasic
+# Basic Example angular-oauth2-oidc
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.7.4.
+This repository shows a basic, bare bones example of how [the `angular-oauth2-oidc` library](https://github.com/manfredsteyer/angular-oauth2-oidc) works.
 
-## Development server
+## Usage
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+This repository has been scaffolded with the Angular 5 CLI.
+Make sure you have the CLI globally installed.
+Then:
 
-## Code scaffolding
+1. Clone this repository
+1. Run `npm install` to get the dependencies
+1. Run `ng serve --open` to get it running on [http://localhost:4200](http://localhost:4200)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+This connects to the IdentityServer also used in the library's example.
+The **credentials** are user "`max`" and password "`geheim`".
 
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+You could also connect to your own IdentityServer by changing `auth-config.ts`.
+Note that your server must whitelist both `http://localhost:4200/index.html` and `http://localhost:4200/silent-refresh.html` for this to work.
